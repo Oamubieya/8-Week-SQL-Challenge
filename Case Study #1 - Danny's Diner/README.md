@@ -15,17 +15,17 @@ Danny wants to use the data to answer a few simple questions about his customers
 
 ![image](https://user-images.githubusercontent.com/81607668/127271130-dca9aedd-4ca9-4ed8-b6ec-1e1920dca4a8.png)
 
-##Datasets
+## Datasets
 There are 3 datasets given by Danny. Those tables are sales, members and menu.
-###Sales
+### Sales
 The sales table captures all customer_id level purchases with an corresponding order_date and product_id information for when and what menu items were ordered.
 ![Sales Table](https://user-images.githubusercontent.com/105673465/218285672-136d63e7-278d-40b8-b08a-76f34ff62c2f.png)
 
-###Menu
+### Menu
 The menu table maps the product_id to the actual product_name and price of each menu item.
 ![Menu Table](https://user-images.githubusercontent.com/105673465/218285675-cc1d2516-0a61-4582-9980-dad0d11f7cc7.png)
 
-###Members
+### Members
 The final members table captures the join_date when a customer_id joined the beta version of the Danny’s Diner loyalty program.
 ![Members Table](https://user-images.githubusercontent.com/105673465/218285678-7cc762cd-75bf-4978-8306-1c37a98535e9.png)
 
