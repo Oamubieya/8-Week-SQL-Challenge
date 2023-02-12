@@ -29,6 +29,34 @@ The menu table maps the product_id to the actual product_name and price of each 
 The final members table captures the join_date when a customer_id joined the beta version of the Danny’s Diner loyalty program.
 ![Members Table](https://user-images.githubusercontent.com/105673465/218285678-7cc762cd-75bf-4978-8306-1c37a98535e9.png)
 
+## Process
+In order to analyze the data I first had to create the tables in SQL (Bigquery). Instead of uploading the 3 tables I created 3 blank tables and manually inserted the data. The schema for the tables were
+![sales schema](https://user-images.githubusercontent.com/105673465/218286239-8b46978e-75d3-4c81-9ed7-3e8a93588af7.png)
+![menu schema](https://user-images.githubusercontent.com/105673465/218286244-0aa2154b-8295-4e6e-883d-cb9abdbd3408.png)
+![members schema](https://user-images.githubusercontent.com/105673465/218286245-2d9d68d0-036a-4e5f-8384-3a915ef5a5c4.png)
+
+```TSQL
+--Inserting data into the sales table
+INSERT INTO `dannys_diner.sales`;
+  (`customer_id`, `order_date`, `product_id`)
+VALUES
+  ('A', '2021-01-01', 1),
+  ('A', '2021-01-01', 2),
+  ('A', '2021-01-07', 2),
+  ('A', '2021-01-10', 3),
+  ('A', '2021-01-11', 3),
+  ('A', '2021-01-11', 3),
+  ('B', '2021-01-01', 2),
+  ('B', '2021-01-02', 2),
+  ('B', '2021-01-04', 1),
+  ('B', '2021-01-11', 1),
+  ('B', '2021-01-16', 3),
+  ('B', '2021-02-01', 3),
+  ('C', '2021-01-01', 3),
+  ('C', '2021-01-01', 3),
+  ('C', '2021-01-07', 3);
+```
+ 
 ## Case Study Questions
 
 1. What is the total amount each customer spent at the restaurant?
