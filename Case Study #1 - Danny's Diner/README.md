@@ -86,9 +86,9 @@ VALUES
 5. Which item was the most popular for each customer?
 6. Which item was purchased first by the customer after they became a member?
 7. Which item was purchased just before the customer became a member?
-10. What is the total items and amount spent for each member before they became a member?
-11. If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how many points would each customer have?
-12. In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi - how many points do customer A and B have at the end of January?
+8. What is the total items and amount spent for each member before they became a member?
+9. If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how many points would each customer have?
+10. In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi - how many points do customer A and B have at the end of January?
 
 ## Solutions
 
@@ -106,13 +106,19 @@ JOIN `dannys_diner.menu` as menu
   on sales.product_id = menu.product_id
 GROUP by customer_id
 ```
-2.
-3.
-4.
-5.
-6.
-7.
-8.
-9.
-10.
+### 2. How many days has each customer visited the restaurant?
+Customer A visted the diner 4 times, Customer B visted 6 times and Customer C visited 2 times.
+```TSQL
+SELECT customer_id, COUNT(distinct(order_date)) AS days_visted
+FROM `dannys_diner.sales`
+GROUP BY customer_id
+```
+### 3. What was the first item from the menu purchased by each customer?
+### 4. What is the most purchased item on the menu and how many times was it purchased by all customers?
+### 5. Which item was the most popular for each customer?
+### 6. Which item was purchased first by the customer after they became a member?
+### 7. Which item was purchased just before the customer became a member?
+### 8. What is the total items and amount spent for each member before they became a member?
+### 9. If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how many points would each customer have?
+### 10. In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi - how many points do customer A and B have at the end of January?
 </details>
