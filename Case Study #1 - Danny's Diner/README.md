@@ -1,5 +1,6 @@
 # Case Study #1: Danny's Diner 
-<img src="https://user-images.githubusercontent.com/81607668/127727503-9d9e7a25-93cb-4f95-8bd0-20b87cb4b459.png" alt="Image" width="500" height="520">(https://8weeksqlchallenge.com/case-study-1/)
+![logo](https://user-images.githubusercontent.com/105673465/218287230-c629e5dc-068e-40b0-af63-f1d31948c770.png)(https://8weeksqlchallenge.com/case-study-1/)
+
 
 ## Table of Contents
 - [Business Task](#business-task)
