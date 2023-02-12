@@ -4,6 +4,7 @@
 ## 📚 Table of Contents
 - [Business Task](#business-task)
 - [Entity Relationship Diagram](#entity-relationship-diagram)
+- [Datasets](#datasets)
 - [Case Study Questions](#case-study-questions)
 
 ***
