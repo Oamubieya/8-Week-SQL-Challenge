@@ -40,7 +40,7 @@ In order to analyze the data I first had to create the tables in SQL (Bigquery).
 ![members schema](https://user-images.githubusercontent.com/105673465/218286245-2d9d68d0-036a-4e5f-8384-3a915ef5a5c4.png)
 
 ```TSQL
---Inserting data into the sales table
+--Inserting data into the sales table--
 INSERT INTO `dannys_diner.sales`;
   (`customer_id`, `order_date`, `product_id`)
 VALUES
