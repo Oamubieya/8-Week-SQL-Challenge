@@ -59,6 +59,19 @@ VALUES
   ('C', '2021-01-01', 3),
   ('C', '2021-01-01', 3),
   ('C', '2021-01-07', 3);
+--Inserting data into the menu table--
+INSERT INTO `dannys_diner.menu`
+  (`product_id`, `product_name`, `price`)
+VALUES
+  (1, 'sushi', 10),
+  (2, 'curry', 15),
+  (3, 'ramen', 12);
+--Inserting data into the members table--
+INSERT INTO `dannys_diner.members`
+  (`customer_id`, `join_date`)
+VALUES
+  ('A', '2021-01-07'),
+  ('B', '2021-01-09');
 ```
  
 ## Case Study Questions
