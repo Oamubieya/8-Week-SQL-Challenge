@@ -91,7 +91,21 @@ VALUES
 12. In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi - how many points do customer A and B have at the end of January?
 
 ## Solutions
-1.
+
+<details>
+<summary>
+View Answers Here
+</summary>
+  
+1. What is the total amount each customer spent at the restaurant?
+  Customer A spent $76, Customer B spent $74 and Customer C spent $36
+```TSQL
+SELECT customer_id, SUM(price) AS total_sales
+FROM `promising-cairn-340119.dannys_diner.sales` as sales
+JOIN `promising-cairn-340119.dannys_diner.menu` as menu
+  on sales.product_id = menu.product_id
+GROUP by customer_id
+```
 2.
 3.
 4.
@@ -101,3 +115,4 @@ VALUES
 8.
 9.
 10.
+</details>
