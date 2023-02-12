@@ -97,12 +97,12 @@ VALUES
 View Answers Here
 </summary>
   
-1. What is the total amount each customer spent at the restaurant?
-  Customer A spent $76, Customer B spent $74 and Customer C spent $36
+### 1. What is the total amount each customer spent at the restaurant?
+Customer A spent $76, Customer B spent $74 and Customer C spent $36
 ```TSQL
 SELECT customer_id, SUM(price) AS total_sales
-FROM `promising-cairn-340119.dannys_diner.sales` as sales
-JOIN `promising-cairn-340119.dannys_diner.menu` as menu
+FROM `dannys_diner.sales` as sales
+JOIN `dannys_diner.menu` as menu
   on sales.product_id = menu.product_id
 GROUP by customer_id
 ```
