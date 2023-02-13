@@ -120,7 +120,7 @@ Customer A's first orders were curry and sushi, Customer B's first order was cur
 WITH ordered_sales AS
 (
    SELECT customer_id, order_date, product_name,
-      DENSE_RANK() OVER(PARTITION BY customer_id
+      DENSE_RANK() OVER(PARTITION BY s.customer_id
       ORDER BY order_date) AS rank
    FROM `dannys_diner.sales` AS s
    JOIN `dannys_diner.menu` AS m
@@ -144,7 +144,43 @@ ORDER BY most_purchased DESC
 LIMIT 1
 ```
 ### 5. Which item was the most popular for each customer?
+Customer A and C's favorite item is ramen while Customer B enjoys all items.
+```TSQL
+WITH fav_product AS
+(
+   SELECT s.customer_id, m.product_name, COUNT(s.product_id) AS order_count,
+      DENSE_RANK() OVER(PARTITION BY s.customer_id
+      ORDER BY COUNT(s.customer_id) DESC) AS rank
+   FROM `dannys_diner.menu` AS m
+   JOIN `dannys_diner.sales` AS s
+      ON m.product_id = s.product_id
+   GROUP BY s.customer_id, m.product_name
+)
+
+SELECT customer_id, product_name, order_count
+FROM fav_product
+WHERE rank = 1;
+```
 ### 6. Which item was purchased first by the customer after they became a member?
+Customer A's first order as a member was curry and Customer B's first order as a member was sushi.
+```TSQL
+WITH member_sales AS 
+(
+   SELECT s.customer_id, m.join_date, s.order_date, s.product_id,
+      DENSE_RANK() OVER(PARTITION BY s.customer_id
+      ORDER BY s.order_date) AS rank
+   FROM `dannys_diner.sales` AS s
+   JOIN `dannys_diner.members` AS m
+      ON m.customer_id = s.customer_id
+   WHERE s.order_date >= m.join_date
+)
+
+SELECT s.customer_id, s.order_date, m2.product_name 
+FROM member_sales AS s
+JOIN `dannys_diner.menu` AS m2
+   ON s.product_id = m2.product_id
+WHERE rank = 1;
+```
 ### 7. Which item was purchased just before the customer became a member?
 ### 8. What is the total items and amount spent for each member before they became a member?
 ### 9. If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how many points would each customer have?
