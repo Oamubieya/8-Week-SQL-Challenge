@@ -182,7 +182,56 @@ JOIN `dannys_diner.menu` AS m2
 WHERE rank = 1;
 ```
 ### 7. Which item was purchased just before the customer became a member?
+Customer A's last order before becoming a member was sushi and curry while Customer B's last order before becoming a member was Sushi.
+```TSQL
+WITH prior_member_sales AS 
+(
+   SELECT s.customer_id, m.join_date, s.order_date, s.product_id,
+      DENSE_RANK() OVER(PARTITION BY s.customer_id
+      ORDER BY s.order_date DESC) AS rank
+   FROM `dannys_diner.sales` AS s
+   JOIN `dannys_diner.members` AS m
+      ON s.customer_id = m.customer_id
+   WHERE s.order_date < m.join_date
+)
+
+SELECT s.customer_id, s.order_date, m2.product_name 
+FROM prior_member_sales AS s
+JOIN `dannys_diner.menu` AS m2
+   ON s.product_id = m2.product_id
+WHERE rank = 1;
+```
 ### 8. What is the total items and amount spent for each member before they became a member?
+Before becoming members Customer A spent $25 on 2 items and Customer B spent $40 on 2 items.
+```TSQL
+SELECT s.customer_id, COUNT(DISTINCT s.product_id) AS unique_menu_item, 
+   SUM(m2.price) AS total_sales
+FROM `dannys_diner.sales` AS s
+JOIN `dannys_diner.members` AS m
+   ON s.customer_id = m.customer_id
+JOIN `dannys_diner.menu` AS m2
+   ON s.product_id = m2.product_id
+WHERE s.order_date < m.join_date
+GROUP BY s.customer_id;
+```
 ### 9. If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how many points would each customer have?
+Customer A has 860 points, Customer B has 940 points and Customer C has 360 points.
+```TSQL
+WITH points AS
+(
+   SELECT *, 
+      CASE
+         WHEN product_id = 1 THEN price * 20
+         ELSE price * 10
+      END AS p_points
+   FROM `dannys_diner.menu`
+)
+
+SELECT s.customer_id, SUM(p_points) AS total_points
+FROM points AS p
+JOIN `dannys_diner.sales` AS s
+   ON p.product_id = s.product_id
+GROUP BY s.customer_id
+```
 ### 10. In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi - how many points do customer A and B have at the end of January?
 </details>
