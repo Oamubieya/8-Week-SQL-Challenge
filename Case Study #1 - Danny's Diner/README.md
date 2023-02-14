@@ -234,4 +234,29 @@ JOIN `dannys_diner.sales` AS s
 GROUP BY s.customer_id
 ```
 ### 10. In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi - how many points do customer A and B have at the end of January?
+The total points for Customer A is 1370 and the Total points for Customer B is 820.
+```TSQL
+WITH jan_date AS
+(
+  SELECT *,
+    DATE_ADD(join_date, INTERVAl +6 day) AS valid_date,
+    LAST_DAY('2021-01-31') AS last_date
+  FROM `dannys_diner.members` AS m
+)
+
+SELECT s.customer_id,
+  SUM(CASE
+    WHEN m.product_name = 'sushi' THEN 2 * 10 * m.price
+    WHEN s.order_date BETWEEN d.join_date AND d.valid_date THEN 2 * 10 * m.price
+    ELSE m.price * 10
+    END
+    ) AS points
+FROM jan_date d
+JOIN `dannys_diner.sales` AS s
+  ON d.customer_id = s.customer_id
+JOIN `dannys_diner.menu` AS m
+  ON m.product_id = s.product_id
+WHERE s.order_date < d.last_date
+GROUP BY s.customer_id
+```
 </details>
