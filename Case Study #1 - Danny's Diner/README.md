@@ -110,9 +110,9 @@ View Answers Here
 Customer A spent $76, Customer B spent $74 and Customer C spent $36
 ```TSQL
 SELECT customer_id, SUM(price) AS total_sales
-FROM `dannys_diner.sales` as sales
-JOIN `dannys_diner.menu` as menu
-  on sales.product_id = menu.product_id
+FROM `dannys_diner.sales` as s
+JOIN `dannys_diner.menu` as m
+  on s.product_id = m.product_id
 GROUP by customer_id
 ```
 ### 2. How many days has each customer visited the restaurant?
@@ -131,7 +131,7 @@ WITH ordered_sales AS
       DENSE_RANK() OVER(PARTITION BY s.customer_id
       ORDER BY order_date) AS rank
    FROM `dannys_diner.sales` AS s
-   JOIN `dannys_diner.menu` AS m
+   FULL JOIN `dannys_diner.menu` AS m
       ON s.product_id = m.product_id
 )
 
