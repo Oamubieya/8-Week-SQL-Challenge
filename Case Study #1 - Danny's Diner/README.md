@@ -93,9 +93,11 @@ VALUES
 
 ## Bonus Questions
 11. Join all the things - Recreate the following table output using the available data.
+
 ![join all things table](https://user-images.githubusercontent.com/105673465/218837465-e3a95862-9179-4c2d-8310-f8aad036bba5.png)
 
 12. Rank all the things - Danny also requires further information about the ranking of customer products, but he purposely does not need the ranking for non-member purchases so he expects null ranking values for the records when customers are not yet part of the loyalty program.
+
 ![rank all things table](https://user-images.githubusercontent.com/105673465/218837516-18a5d859-4323-4358-9fb5-fcfa1f9f7da2.png)
 
 
