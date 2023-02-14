@@ -91,6 +91,14 @@ VALUES
 9. If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how many points would each customer have?
 10. In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi - how many points do customer A and B have at the end of January?
 
+## Bonus Questions
+11. Join all the things - Recreate the following table output using the available data.
+![join all things table](https://user-images.githubusercontent.com/105673465/218837465-e3a95862-9179-4c2d-8310-f8aad036bba5.png)
+
+12. Rank all the things - Danny also requires further information about the ranking of customer products, but he purposely does not need the ranking for non-member purchases so he expects null ranking values for the records when customers are not yet part of the loyalty program.
+![rank all things table](https://user-images.githubusercontent.com/105673465/218837516-18a5d859-4323-4358-9fb5-fcfa1f9f7da2.png)
+
+
 ## Solutions
 
 <details>
@@ -258,5 +266,42 @@ JOIN `dannys_diner.menu` AS m
   ON m.product_id = s.product_id
 WHERE s.order_date < d.last_date
 GROUP BY s.customer_id
+```
+### 11. Join all the things
+```TSQL
+SELECT s.customer_id, s.order_date, m.product_name, m.price,
+   CASE
+      WHEN m2.join_date > s.order_date THEN 'N'
+      WHEN m2.join_date <= s.order_date THEN 'Y'
+      ELSE 'N'
+      END AS member
+FROM `dannys_diner.sales` AS s
+LEFT JOIN `dannys_diner.menu` AS m
+   ON s.product_id = m.product_id
+LEFT JOIN `dannys_diner.members` AS m2
+   ON s.customer_id = m2.customer_id
+```
+### 12. Rank all the things
+```TSQL
+WITH rankings AS 
+(
+   SELECT s.customer_id, s.order_date, m.product_name, m.price,
+      CASE
+      WHEN m2.join_date > s.order_date THEN 'N'
+      WHEN m2.join_date <= s.order_date THEN 'Y'
+      ELSE 'N' END AS member
+   FROM `dannys_diner.sales` AS s
+   LEFT JOIN `dannys_diner.menu` AS m
+      ON s.product_id = m.product_id
+   LEFT JOIN `dannys_diner.members` AS m2
+      ON s.customer_id = m2.customer_id
+)
+
+SELECT *, CASE
+   WHEN member = 'N' then NULL
+   ELSE
+      RANK () OVER(PARTITION BY customer_id, member
+      ORDER BY order_date) END AS ranking
+FROM rankings;
 ```
 </details>
