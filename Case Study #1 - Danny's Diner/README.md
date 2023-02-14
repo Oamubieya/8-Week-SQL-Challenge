@@ -133,7 +133,7 @@ WITH ordered_sales AS
       DENSE_RANK() OVER(PARTITION BY s.customer_id
       ORDER BY order_date) AS rank
    FROM `dannys_diner.sales` AS s
-   FULL JOIN `dannys_diner.menu` AS m
+   INNER JOIN `dannys_diner.menu` AS m
       ON s.product_id = m.product_id
 )
 
@@ -162,8 +162,8 @@ WITH fav_product AS
       DENSE_RANK() OVER(PARTITION BY s.customer_id
       ORDER BY COUNT(s.customer_id) DESC) AS rank
    FROM `dannys_diner.menu` AS m
-   JOIN `dannys_diner.sales` AS s
-      ON m.product_id = s.product_id
+   LEFT JOIN `dannys_diner.sales` AS s
+      ON s.product_id = m.product_id
    GROUP BY s.customer_id, m.product_name
 )
 
