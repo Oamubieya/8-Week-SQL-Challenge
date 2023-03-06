@@ -34,7 +34,7 @@ Customer pizza orders are captured in the customer_orders table with 1 row for e
 
 The pizza_id relates to the type of pizza which was ordered whilst the exclusions are the ingredient_id values which should be removed from the pizza and the extras are the ingredient_id values which need to be added to the pizza.
 
-![Menu Table](https://user-images.githubusercontent.com/105673465/218285675-cc1d2516-0a61-4582-9980-dad0d11f7cc7.png)
+![customer_orders table](https://user-images.githubusercontent.com/105673465/223239032-6cb4794c-cb79-4d91-ae1f-fbc7318fde9c.png)
 
 ### Runner Orders
 After each orders are received through the system - they are assigned to a runner - however not all orders are fully completed and can be cancelled by the restaurant or the customer.
@@ -138,6 +138,11 @@ SELECT count(order_id) as total_orders
 FROM `pizza_runner.customer_orders`
 ```
 2. How many unique customer orders were made?
+There were 10 unique customer orders made.
+```TSQL
+SELECT count (DISTINCT order_id) as unique_orders
+FROM `pizza_runner.customer_orders`
+```
 3. How many successful orders were delivered by each runner?
 4. How many of each type of pizza was delivered?
 5. How many Vegetarian and Meatlovers were ordered by each customer?
