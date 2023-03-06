@@ -130,11 +130,11 @@ View Answers Here
 </summary>
 A. Pizza Metrics
 1. How many pizzas were ordered?
-  There were 14 pizzas ordered.
-  ```TSQL
-  SELECT count(order_id) as total_orders
-  FROM `pizza_runner.customer_orders`
-  ```
+There were 14 pizzas ordered.
+```TSQL
+SELECT count(order_id) as total_orders
+FROM `pizza_runner.customer_orders`
+```
 2. How many unique customer orders were made?
 3. How many successful orders were delivered by each runner?
 4. How many of each type of pizza was delivered?
