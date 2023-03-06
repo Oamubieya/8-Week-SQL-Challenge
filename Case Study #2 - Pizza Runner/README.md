@@ -128,9 +128,11 @@ For the runner orders table some of the years in the pickup time were invalid. W
 <summary>
 View Answers Here
 </summary>
-A. Pizza Metrics
+
+### A. Pizza Metrics
 1. How many pizzas were ordered?
 There were 14 pizzas ordered.
+
 ```TSQL
 SELECT count(order_id) as total_orders
 FROM `pizza_runner.customer_orders`
